@@ -10,11 +10,11 @@ public class Time {
 		print(69);
 	}
 
-	public static void print(int minutes){
-		if (minutes < 0 || minutes > 59){
+	public static void print(int interval){
+		if (interval < 0 || interval > 59){
 			throw new IllegalArgumentException("Неправильное число");
 		}
-		int i = minutes / 15;
+		int i = interval / 15;
 		switch (i) {
 			case 0 -> System.out.println("Первая");
 			case 1 -> System.out.println("Вторая");
