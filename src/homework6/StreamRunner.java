@@ -1,5 +1,8 @@
 package homework6;
 
+import homework6.model.Result;
+import homework6.model.Student;
+
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -55,6 +58,10 @@ public class StreamRunner {
 							 new Student("Мария", "Марьина", 3, Arrays.asList(4, 4, 4, 4)));
 	}
 
+	/**
+	 * Преобразовать список студентов в ассоциативный массив, где ключом является номер курса, а значением:
+	 * Средняя оценка студентов этого курса, количество оценок у которых больше 3-х
+	 */
 	private static Map<Integer, Double> taskOne(List<Student> students) {
 		return students.stream().filter(student -> student.getMarks().size() > 3)
 			.collect(groupingBy(Student::getNumberOfCourse)).entrySet().stream().collect(
@@ -63,6 +70,10 @@ public class StreamRunner {
 					.getAverage()));
 	}
 
+	/**
+	 * Преобразовать список студентов в ассоциативный массив, где ключом является номер курса, а значением:
+	 * Средняя оценка студентов этого курса, количество оценок у которых больше 3-х
+	 */
 	private static Map<Integer, Double> taskOneSecond(List<Student> students) {
 		return students.stream().filter(student -> student.getMarks().size() > 3).collect(
 			groupingBy(Student::getNumberOfCourse, Collectors.averagingDouble(
@@ -70,12 +81,19 @@ public class StreamRunner {
 					.getAverage())));
 	}
 
+	/**
+	 * Список студентов данного курса, но только с полями Имя и Фамилия.
+	 */
 	private static Map<Integer, List<String>> taskTwo(List<Student> students) {
 
 		return students.stream().collect(groupingBy(Student::getNumberOfCourse)).entrySet().stream().collect(
 			Collectors.toMap(Map.Entry::getKey, integerListEntry -> integerListEntry.getValue().stream()
 				.map(student -> student.getName() + " " + student.getSurname()).sorted().collect(Collectors.toList())));
 	}
+
+	/**
+	 * Список студентов данного курса, но только с полями Имя и Фамилия.
+	 */
 
 	private static Map<Integer, List<String>> taskTwoTwo(List<Student> students) {
 
@@ -84,6 +102,11 @@ public class StreamRunner {
 					   mapping(student -> student.getName() + " " + student.getSurname(), toList())));
 	}
 
+	/**
+	 * Объект с двумя полями:
+	 * - Отсортированный список студентов с пункта 2
+	 * - Средняя оценка этих студентов
+	 */
 	private static Map<Integer, Result> taskThree(List<Student> students) {
 
 		return students.stream().collect(groupingBy(Student::getNumberOfCourse)).entrySet().stream()

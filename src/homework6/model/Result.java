@@ -1,6 +1,7 @@
-package homework6;
+package homework6.model;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Result {
@@ -31,5 +32,20 @@ public class Result {
 	@Override
 	public String toString() {
 		return "Result{" + "students=" + students + ", average=" + average + '}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Result result = (Result) o;
+		return Objects.equals(students, result.students) && Objects.equals(average, result.average);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(students, average);
 	}
 }
